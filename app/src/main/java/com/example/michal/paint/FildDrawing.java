@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class FildDrawing extends View
 {
+    private static final float TOUCH_TOLERANCE = 10;
+
     private Bitmap bitmap;// Field image
     private Canvas canvasBit;// drawing in bitmap
     private Paint paintScreen;// show bitmap
@@ -62,7 +64,7 @@ public class FildDrawing extends View
     //// onDrawing refresh when user chane bitmap ( drawing line )
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+        //super.onDraw(canvas);
         canvas.drawBitmap(bitmap,0,0,paintScreen);
 
         //// take key every id finger and drawing in CANVAS line by paintLine ///
@@ -79,34 +81,79 @@ public class FildDrawing extends View
         int action = event.getActionMasked();
         int idFinger = event.getActionIndex();
 
-        if( action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_DOWN){
+        if( action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_DOWN){// ferst touch
             touchFirst(event.getX(idFinger), event.getY(idFinger),event.getPointerId(idFinger));
-
-        }else if( action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP ){
+        }else if( action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP ){// next touch
             ended(event.getPointerId(idFinger));
-
-        }else {
+        }else {// end touch
             touchMoved(event);
-
         }
-
-        return super.onTouchEvent(event);
+        invalidate();// refresh
+        return true;
     }
 
+
+    //////
+    ///// Create Path and Point
+    ///// look, is it id in patchmap
+    //// if this is ferst touch id, create new path
+    private void touchFirst(float x, float y, int idLine){
+        Path path;
+        Point point;
+
+        if(pathMap.containsKey(idLine)){
+            path = pathMap.get(idLine);// get existing line ( this line is visible in screen )
+            path.reset(); // restart line ( because new point can't conect with old line
+            point = pointMap.get(idLine); // get end point line, which existing
+
+        }else {
+            // declaration path and poin, and initialization
+            path = new Path();
+            pathMap.put(idLine,path);
+            point = new Point();
+            pointMap.put(idLine,point);
+        }
+
+        path.moveTo(x,y);// first co-ordinates tihs finger
+        point.x = (int) x;
+        point.y = (int) y;
+    }
 
 
     private void touchMoved(MotionEvent event){
+        for( int i = 0; i < event.getPointerCount(); i++){////// step by step all idLine
+            int idPointer = event.getPointerId(i); // get id event ( finger )
+            int indexPointer = event.findPointerIndex(idPointer);// get index
 
+            if(pathMap.containsKey(idPointer)){// if existing path for finger ( have to path because created in touchFirst()
+                float newX = event.getX(indexPointer);// get new point
+                float newY = event.getY(indexPointer);
+
+                Path path = pathMap.get(idPointer); // get path and point current finger
+                Point point = pointMap.get(idPointer);
+
+                float deltaX = Math.abs(newX - point.x); // count difference carrent point and past point ( point.x declareting int touchFirst and for end this method )
+                float deltaY = Math.abs(newY - point.y);
+
+                if( deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE){ // if volue delta bigger than 10 000 drawing line
+                    path.quadTo(point.x,point.y,(newX + point.x)/2, (newY - point.y)/2);
+
+                    point.x = (int) newX;
+                    point.y = (int) newY;
+                }
+            }
+        }
     }
 
     private void ended(int idLine){
+        Path path = pathMap.get(idLine);
+        canvasBit.drawPath(path,paintLine);
+        path.reset();
 
 
     }
-    private void touchFirst(float x, float y, int idLine){
 
 
-    }
 
 
 
