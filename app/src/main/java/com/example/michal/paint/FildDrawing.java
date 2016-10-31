@@ -53,7 +53,7 @@ public class FildDrawing extends View
     ///// make bitmap by good size
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+        //super.onSizeChanged(w, h, oldw, oldh);
         bitmap = Bitmap.createBitmap(getWidth(),getHeight(), Bitmap.Config.ARGB_8888);// create field bitmap ( widht screen, height screen, and configuration system color
         canvasBit = new Canvas(bitmap);// create canvas
         bitmap.eraseColor(Color.WHITE);// color backgrand
@@ -136,7 +136,7 @@ public class FildDrawing extends View
                 float deltaY = Math.abs(newY - point.y);
 
                 if( deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE){ // if volue delta bigger than 10 000 drawing line
-                    path.quadTo(point.x,point.y,(newX + point.x)/2, (newY - point.y)/2);
+                    path.quadTo(point.x,point.y,(newX + point.x)/2, (newY + point.y)/2);
 
                     point.x = (int) newX;
                     point.y = (int) newY;
