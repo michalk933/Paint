@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.MonthDisplayHelper;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -41,7 +42,7 @@ public class FildDrawing extends View
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setAntiAlias(true);// no sharp
         paintLine.setStrokeWidth(5);// width line
-        ////// next custom by user //////////////
+        ////// next custom by user ///////////////
 
     }
 
@@ -75,6 +76,57 @@ public class FildDrawing extends View
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getActionMasked();
+        int idFinger = event.getActionIndex();
+
+        if( action == MotionEvent.ACTION_POINTER_DOWN || action == MotionEvent.ACTION_DOWN){
+            touchFirst(event.getX(idFinger), event.getY(idFinger),event.getPointerId(idFinger));
+
+        }else if( action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP ){
+            ended(event.getPointerId(idFinger));
+
+        }else {
+            touchMoved(event);
+
+        }
+
         return super.onTouchEvent(event);
     }
+
+
+
+    private void touchMoved(MotionEvent event){
+
+    }
+
+    private void ended(int idLine){
+
+
+    }
+    private void touchFirst(float x, float y, int idLine){
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
