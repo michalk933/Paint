@@ -6,4 +6,5 @@
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="zmie_kolor">Zmień kolor</string>
+    <string name="zmien_kolor_tla">Zmien kolor tla</string>
 </resources>

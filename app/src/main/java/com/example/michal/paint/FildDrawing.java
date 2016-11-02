@@ -165,6 +165,10 @@ public class FildDrawing extends View
         return paintLine.getColor();
     }
 
+    public void setBackColor(int color){
+        bitmap.eraseColor(color);
+    }
+
 
 
 

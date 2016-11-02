@@ -43,6 +43,10 @@ public class MainActivityFragment extends Fragment {
                 ColorDialog colorDialog = new ColorDialog();
                 colorDialog.show(getFragmentManager(), "color");
                 return true;
+            case R.id.color_back_menu:
+                ColorBackDialog colorBackDialog = new ColorBackDialog();
+                colorBackDialog.show(getFragmentManager(),"back color");
+                return true;
 
 
         }
