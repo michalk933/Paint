@@ -30,7 +30,6 @@ public class MainActivityFragment extends Fragment {
 
         fildDrawing = (FildDrawing) view.findViewById(R.id.fildDrawingFragment);
 
-
         return view;
     }
 

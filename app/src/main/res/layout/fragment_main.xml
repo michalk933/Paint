@@ -11,4 +11,5 @@
     tools:context="com.example.michal.paint.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
+
 </com.example.michal.paint.FildDrawing>

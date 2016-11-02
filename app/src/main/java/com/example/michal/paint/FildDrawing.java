@@ -169,10 +169,13 @@ public class FildDrawing extends View
     }
 
 
-    public void cleanField(){
+    public FildDrawing cleanField(){
         pathMap.clear();
-        pointMap.clear();bitmap.eraseColor(Color.WHITE);
+        pointMap.clear();
+        bitmap.eraseColor(Color.WHITE);
+        paintLine.setColor(Color.BLACK);
         invalidate();
+        return null;
     }
 
 
