@@ -62,6 +62,10 @@ public class MainActivityFragment extends Fragment {
             case R.id.save_menu:
                 saveImage();
                 return true;
+            case R.id.figures_menu:
+                FiguresDialog figuresDialog = new FiguresDialog();
+                figuresDialog.show(getFragmentManager(),"Rodzaj rysunku");
+                return true;
 
         }
 

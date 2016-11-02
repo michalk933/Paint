@@ -12,4 +12,8 @@
     <string name="grubo_lini">Grubość lini</string>
     <string name="zapisz">Zapisz</string>
     <string name="name_file">Nazwa:</string>
+    <string name="linie_drawing">Linie</string>
+    <string name="kola_drawing">Koła</string>
+    <string name="rodzaj_rysunku">Rodzaj rysunku</string>
+    <string name="rec">Kradrat</string>
 </resources>

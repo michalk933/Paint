@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 /**
@@ -32,6 +33,8 @@ public class FildDrawing extends View
 
     private Map<Integer,Path> pathMap = new HashMap<>();
     private Map<Integer,Point> pointMap = new HashMap<>();
+
+    private int figure = 0;
 
 
 
@@ -137,7 +140,16 @@ public class FildDrawing extends View
                 float deltaY = Math.abs(newY - point.y);
 
                 if( deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE){ // if volue delta bigger than 10 000 drawing line
-                    path.quadTo(point.x,point.y,(newX + point.x)/2, (newY + point.y)/2);
+                    if(figure == 0) {
+                        path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
+                    }else if(figure == 1){
+                        Random r = new Random();
+                        int i1 = r.nextInt(100 - 15) + 15;
+                        path.addCircle(point.x, point.y,i1, Path.Direction.CW);
+                    }else if(figure == 2 ){
+                        path.addRect(point.x, point.y,point.x+20, point.y+20, Path.Direction.CW);
+                    }
+
 
                     point.x = (int) newX;
                     point.y = (int) newY;
@@ -182,7 +194,9 @@ public class FildDrawing extends View
         return bitmap;
     }
 
-
+    public void setFigure(int typeFigure){
+        figure = typeFigure;
+    }
 
 
 

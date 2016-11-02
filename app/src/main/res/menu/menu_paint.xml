@@ -17,6 +17,11 @@
         android:icon="@drawable/ic_network_cell_black_24dp"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/figures_menu"
+        android:title="@string/rodzaj_rysunku"
+        android:icon="@drawable/ic_extension_black_24dp"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/save_menu"
         android:title="@string/zapisz"
         android:icon="@drawable/ic_save_black_24dp"
