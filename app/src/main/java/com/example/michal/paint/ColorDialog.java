@@ -3,6 +3,7 @@ package com.example.michal.paint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -33,58 +34,55 @@ public class ColorDialog extends DialogFragment {
         redSeekBar = (SeekBar)colorDialogView.findViewById(R.id.redSeekBar);
         greenSeekBar = (SeekBar)colorDialogView.findViewById(R.id.greenSeekBar);
         blueSeekBar = (SeekBar)colorDialogView.findViewById(R.id.blueSeekBar);
+        colorView = colorDialogView.findViewById(R.id.colorView);
+
 
         alphaSeekBar.setOnSeekBarChangeListener(changeListener);
         redSeekBar.setOnSeekBarChangeListener(changeListener);
         greenSeekBar.setOnSeekBarChangeListener(changeListener);
         blueSeekBar.setOnSeekBarChangeListener(changeListener);
 
+        final FildDrawing fildDrawingg = getFildDrawing().getFildDrawing();
+
+
+        color = fildDrawingg.getColorLine();
+        alphaSeekBar.setProgress(Color.alpha(color));
+        redSeekBar.setProgress(Color.red(color));
+        greenSeekBar.setProgress(Color.green(color));
+        blueSeekBar.setProgress(Color.blue(color));
+
+
          builder.setPositiveButton("Wybierz", new DialogInterface.OnClickListener() {
              @Override
              public void onClick(DialogInterface dialog, int which) {
-                 Toast.makeText(getContext(),"goog",Toast.LENGTH_LONG).show();
+                 fildDrawingg.setColorLine(color);
              }
          });
-
-
-
-
-
 
         return builder.create();
     }
 
-    private SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
+    private MainActivityFragment getFildDrawing(){
+        return (MainActivityFragment) getFragmentManager().findFragmentById(R.id.fildView);
+    }
+
+
+
+
+
+    private final SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            if(fromUser){
-
-
-
+            if(fromUser) {
+                color = Color.argb(alphaSeekBar.getProgress(), redSeekBar.getProgress(), greenSeekBar.getProgress(), blueSeekBar.getProgress());
             }
-
-
-
-
+            colorView.setBackgroundColor(color);
         }
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {}
 
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
+        public void onStopTrackingTouch(SeekBar seekBar) {}
     };
-
-
-
-
-
-
-
-
 
 }

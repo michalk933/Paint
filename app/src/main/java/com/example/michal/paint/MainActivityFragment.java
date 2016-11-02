@@ -49,4 +49,10 @@ public class MainActivityFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // this method get current object FildDrawing, because we would like work in one object, and no open new object
+    public FildDrawing getFildDrawing(){
+        return fildDrawing;
+    }
+
 }

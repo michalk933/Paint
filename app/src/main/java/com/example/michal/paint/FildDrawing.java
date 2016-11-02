@@ -11,9 +11,11 @@ import android.util.AttributeSet;
 import android.util.MonthDisplayHelper;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * Created by michal on 30.10.2016.
@@ -32,22 +34,25 @@ public class FildDrawing extends View
     private Map<Integer,Point> pointMap = new HashMap<>();
 
 
+
+
+
+
     public FildDrawing(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         paintLine = new Paint();
         paintScreen = new Paint();
 
-        paintLine.setColor(Color.BLACK);// color line
         ////// next custom by user //////////////
+        paintLine.setColor(Color.BLACK);
         paintLine.setStrokeCap(Paint.Cap.ROUND);// end round
         paintLine.setStyle(Paint.Style.STROKE);
         paintLine.setAntiAlias(true);// no sharp
         paintLine.setStrokeWidth(5);// width line
         ////// next custom by user ///////////////
-
+        Toast.makeText(getContext(), "konstruktor",Toast.LENGTH_LONG).show();
     }
-
 
 
     ///// make bitmap by good size
@@ -149,8 +154,15 @@ public class FildDrawing extends View
         Path path = pathMap.get(idLine);
         canvasBit.drawPath(path,paintLine);
         path.reset();
+    }
 
 
+    public void setColorLine(int color){
+        paintLine.setColor(color);
+        Toast.makeText(getContext(), String.valueOf(color),Toast.LENGTH_LONG).show();
+    }
+    public int getColorLine(){
+        return paintLine.getColor();
     }
 
 

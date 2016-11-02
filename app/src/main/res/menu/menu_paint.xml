@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
     <item
         android:id="@+id/color_menu"
         android:title="@string/zmie_kolor"
-        android:icon="@drawable/ic_color_lens_black_24dp">
-    </item>
+        android:icon="@drawable/ic_color_lens_black_24dp"
+        app:showAsAction="ifRoom" />
 
 </menu>
