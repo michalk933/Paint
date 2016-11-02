@@ -16,5 +16,10 @@
         android:title="@string/zmiana_grubosci"
         android:icon="@drawable/ic_network_cell_black_24dp"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/save_menu"
+        android:title="@string/zapisz"
+        android:icon="@drawable/ic_save_black_24dp"
+        app:showAsAction="ifRoom" />
 
 </menu>

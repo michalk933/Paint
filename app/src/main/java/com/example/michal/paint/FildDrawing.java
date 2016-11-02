@@ -178,6 +178,10 @@ public class FildDrawing extends View
         return null;
     }
 
+    public Bitmap getBitmapToSave(){
+        return bitmap;
+    }
+
 
 
 

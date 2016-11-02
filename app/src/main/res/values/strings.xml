@@ -10,4 +10,6 @@
     <string name="width_line">Width line</string>
     <string name="zmiana_grubosci">Zmiana grubosci</string>
     <string name="grubo_lini">Grubość lini</string>
+    <string name="zapisz">Zapisz</string>
+    <string name="name_file">Nazwa:</string>
 </resources>

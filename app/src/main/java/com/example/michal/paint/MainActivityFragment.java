@@ -1,5 +1,9 @@
 package com.example.michal.paint;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -20,6 +24,7 @@ import java.util.zip.Inflater;
  */
 public class MainActivityFragment extends Fragment {
     private FildDrawing fildDrawing;
+    private final static int SAVE_IMAGE_PERMISSION_REQUEST_CODE = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +59,9 @@ public class MainActivityFragment extends Fragment {
                 WidthDialog widthDialog = new WidthDialog();
                 widthDialog.show(getFragmentManager(),"Wybierz grubosc");
                 return true;
+            case R.id.save_menu:
+                saveImage();
+                return true;
 
         }
 
@@ -63,6 +71,29 @@ public class MainActivityFragment extends Fragment {
     // this method get current object FildDrawing, because we would like work in one object, and no open new object
     public FildDrawing getFildDrawing(){
         return fildDrawing;
+    }
+
+    private void saveImage(){
+        if(getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+            if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Aplikacja może zapisać obraz dpiero po uzyskaniu zezwolenia");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},SAVE_IMAGE_PERMISSION_REQUEST_CODE);
+                    }
+                });
+                builder.create();
+            }else {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},SAVE_IMAGE_PERMISSION_REQUEST_CODE);
+            }
+        }else{
+            SaveDialog saveDialog = new SaveDialog();
+            saveDialog.show(getFragmentManager(),"Zapisz");
+        }
+
     }
 
 }
