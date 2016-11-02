@@ -50,27 +50,18 @@ public class ColorBackDialog extends DialogFragment {
         blueSeekBar.setProgress(Color.blue(color));
 
 
-
-
-
         builder.setPositiveButton("Wybierz kolor", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 fildDrawing.setBackColor(color);
             }
         });
-
-
-
-
         return builder.create();
     }
 
     private MainActivityFragment getFieldDrawingWithMain(){
         return (MainActivityFragment) getFragmentManager().findFragmentById(R.id.fildView);
     }
-
-
 
 
     private final SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {

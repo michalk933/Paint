@@ -47,7 +47,10 @@ public class MainActivityFragment extends Fragment {
                 ColorBackDialog colorBackDialog = new ColorBackDialog();
                 colorBackDialog.show(getFragmentManager(),"back color");
                 return true;
-
+            case R.id.width_menu:
+                WidthDialog widthDialog = new WidthDialog();
+                widthDialog.show(getFragmentManager(),"Wybierz grubosc");
+                return true;
 
         }
 

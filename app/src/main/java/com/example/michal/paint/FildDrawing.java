@@ -169,6 +169,9 @@ public class FildDrawing extends View
         bitmap.eraseColor(color);
     }
 
+    public void setWidhtLine(int width){
+        paintLine.setStrokeWidth(width);
+    }
 
 
 

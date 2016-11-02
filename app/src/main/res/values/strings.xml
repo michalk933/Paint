@@ -7,4 +7,7 @@
     <string name="blue">Blue</string>
     <string name="zmie_kolor">Zmień kolor</string>
     <string name="zmien_kolor_tla">Zmien kolor tla</string>
+    <string name="width_line">Width line</string>
+    <string name="zmiana_grubosci">Zmiana grubosci</string>
+    <string name="grubo_lini">Grubość lini</string>
 </resources>
