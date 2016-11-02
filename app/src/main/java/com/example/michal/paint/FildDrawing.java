@@ -35,9 +35,6 @@ public class FildDrawing extends View
 
 
 
-
-
-
     public FildDrawing(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -51,7 +48,6 @@ public class FildDrawing extends View
         paintLine.setAntiAlias(true);// no sharp
         paintLine.setStrokeWidth(5);// width line
         ////// next custom by user ///////////////
-        Toast.makeText(getContext(), "konstruktor",Toast.LENGTH_LONG).show();
     }
 
 
@@ -159,7 +155,6 @@ public class FildDrawing extends View
 
     public void setColorLine(int color){
         paintLine.setColor(color);
-        Toast.makeText(getContext(), String.valueOf(color),Toast.LENGTH_LONG).show();
     }
     public int getColorLine(){
         return paintLine.getColor();
@@ -174,6 +169,11 @@ public class FildDrawing extends View
     }
 
 
+    public void cleanField(){
+        pathMap.clear();
+        pointMap.clear();bitmap.eraseColor(Color.WHITE);
+        invalidate();
+    }
 
 
 

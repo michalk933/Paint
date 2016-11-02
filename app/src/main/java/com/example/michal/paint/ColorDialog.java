@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 /**
  * Created by michal on 31.10.2016.
