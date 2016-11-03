@@ -66,10 +66,11 @@ public class MainActivityFragment extends Fragment {
                 FiguresDialog figuresDialog = new FiguresDialog();
                 figuresDialog.show(getFragmentManager(),"Rodzaj rysunku");
                 return true;
-            case R.id.load_image_menu:
-                LoadDialog loadDialog = new LoadDialog();
-                loadDialog.show(getFragmentManager(),"Wczytaj zdjecie");
+            case R.id.txt_menu:
+                txtDialog txtDialog = new txtDialog();
+                txtDialog.show(getFragmentManager(),"Podaj tekst");
                 return true;
+
         }
 
         return super.onOptionsItemSelected(item);

@@ -3,13 +3,20 @@ package com.example.michal.paint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringDef;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -19,8 +26,11 @@ import android.widget.Toast;
 public class FiguresDialog extends DialogFragment {
 
     private RadioGroup figureRadioGrup;
-    private RadioButton lineRadioButton, ringRadioButton,recRadioButton;
+    private RadioButton lineRadioButton, ringRadioButton,recRadioButton,ringOneSizeRadioButton,koloPlusRadioButton, kwadratPlusRadioButton;
+    private SeekBar sizeSeekBar;
+    private TextView showSize,showFigureTextView;
     private int typeFigure = 0;
+    private int Size;
 
     @NonNull
     @Override
@@ -34,9 +44,19 @@ public class FiguresDialog extends DialogFragment {
         lineRadioButton = (RadioButton)figuresView.findViewById(R.id.linieRadioButton);
         ringRadioButton = (RadioButton)figuresView.findViewById(R.id.ringRadioButton);
         recRadioButton = (RadioButton)figuresView.findViewById(R.id.recRadioButton);
+        ringOneSizeRadioButton = (RadioButton)figuresView.findViewById(R.id.ringOneSizeRadioButton);
+        sizeSeekBar = (SeekBar)figuresView.findViewById(R.id.sizeTxtSeekBar);
+        showSize = (TextView)figuresView.findViewById(R.id.txtShowTextView);
+        showFigureTextView = (TextView) figuresView.findViewById(R.id.showFigureTextView);
+
+        ////////
+        koloPlusRadioButton = (RadioButton)figuresView.findViewById(R.id.recPlusRadioButton);
+        kwadratPlusRadioButton = (RadioButton)figuresView.findViewById(R.id.recPlusRadioButton);
 
 
 
+
+        sizeSeekBar.setOnSeekBarChangeListener(changeListenerSeek);
         figureRadioGrup.setOnCheckedChangeListener(checkedlistener);
 
         final FildDrawing fildDrawing = getFieldDrawinfWithMain().getFildDrawing();
@@ -46,7 +66,7 @@ public class FiguresDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(), String.valueOf(typeFigure),Toast.LENGTH_LONG).show();
-                fildDrawing.setFigure(typeFigure);
+                fildDrawing.setFigure(typeFigure,Size);
             }
         });
 
@@ -72,13 +92,39 @@ public class FiguresDialog extends DialogFragment {
                 case R.id.recRadioButton:
                     typeFigure = 2;
                     break;
-
+                case R.id.ringOneSizeRadioButton:
+                    typeFigure = 4;
+                    break;
+                case R.id.ringPlusRadioButton:
+                    typeFigure = 5;
+                    break;
+                case R.id.recPlusRadioButton:
+                    typeFigure = 6;
+                    break;
             }
-
-
         }
     };
 
+    private SeekBar.OnSeekBarChangeListener changeListenerSeek = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if(fromUser){
+                Size = sizeSeekBar.getProgress();
+                showFigureTextView.setTextSize(Size);
+                showSize.setText(String.valueOf(Size));
+            }
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
+    };
 
 
 

@@ -2,18 +2,23 @@ package com.example.michal.paint;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Picture;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
+import android.text.Layout;
 import android.util.AttributeSet;
 import android.util.MonthDisplayHelper;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -39,6 +44,9 @@ public class FildDrawing extends View
     private Map<Integer,Point> pointMap = new HashMap<>();
 
     private int figure = 0;
+    private int size;
+    private String addTxt;
+
 
 
 
@@ -144,6 +152,25 @@ public class FildDrawing extends View
                 float deltaY = Math.abs(newY - point.y);
 
                 if( deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE){ // if volue delta bigger than 10 000 drawing line
+                    /*
+                    switch (figure) {
+                        case 0:
+                            path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
+                            return ;
+                        case 1:
+                            Random r = new Random();
+                            int i1 = r.nextInt(100 - 15) + 15;
+                            path.addCircle(point.x, point.y,i1, Path.Direction.CW);
+                            return;
+                        case 2:
+                            path.addRect(point.x, point.y,point.x+size, point.y+size, Path.Direction.CW);
+                            return;
+                        case 4:
+                            path.addCircle(point.x, point.y,size, Path.Direction.CW);
+                            return;
+
+                    }*/
+
                     if(figure == 0) {
                         path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
                     }else if(figure == 1){
@@ -151,12 +178,53 @@ public class FildDrawing extends View
                         int i1 = r.nextInt(100 - 15) + 15;
                         path.addCircle(point.x, point.y,i1, Path.Direction.CW);
                     }else if(figure == 2 ){
-                        path.addRect(point.x, point.y,point.x+20, point.y+20, Path.Direction.CW);
+                        path.addRect(point.x, point.y,point.x+size, point.y+size, Path.Direction.CW);
+                    }else if(figure == 4 ){
+                        path.addCircle(point.x, point.y,size, Path.Direction.CW);
+                    }else if(figure == 5 ){
+                        switch (figure) {
+                            case 0:
+                                path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
+                                return ;
+                            case 1:
+                                Random r = new Random();
+                                int i1 = r.nextInt(100 - 15) + 15;
+                                path.addCircle(point.x, point.y,i1, Path.Direction.CW);
+                                return;
+                            case 2:
+                                path.addRect(point.x, point.y,point.x+size, point.y+size, Path.Direction.CW);
+                                return;
+                            case 4:
+                                path.addCircle(point.x, point.y,size, Path.Direction.CW);
+                                return;
+                        }
+                    }else if(figure == 6 ) {
+                        switch (figure) {
+                            case 0:
+                                path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
+                                return;
+                            case 1:
+                                Random r = new Random();
+                                int i1 = r.nextInt(100 - 15) + 15;
+                                path.addCircle(point.x, point.y, i1, Path.Direction.CW);
+                                return;
+                            case 2:
+                                path.addRect(point.x, point.y, point.x + size, point.y + size, Path.Direction.CW);
+                                return;
+                            case 4:
+                                path.addCircle(point.x, point.y, size, Path.Direction.CW);
+                                return;
+                        }
                     }
 
 
                     point.x = (int) newX;
                     point.y = (int) newY;
+                }else if(figure == 3){
+                    paintLine.setTextSize(size);
+                    canvasBit.drawTextOnPath(addTxt,path,point.x,point.y,paintLine);
+                    figure = 0;
+
                 }
             }
         }
@@ -196,15 +264,17 @@ public class FildDrawing extends View
         return bitmap;
     }
 
-    public void setFigure(int typeFigure){
+    public void setFigure(int typeFigure, int sizeFigure){
+        size = sizeFigure;
         figure = typeFigure;
     }
 
-
-    public void imgUri(Uri image){
+    public void setText(String txt,int sizeTxt){
+        addTxt = txt;
+        figure = 3;
+        size = sizeTxt;
 
     }
-
 
 
 

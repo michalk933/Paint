@@ -17,4 +17,7 @@
     <string name="rodzaj_rysunku">Rodzaj rysunku</string>
     <string name="rec">Kradrat</string>
     <string name="dodaj_tlo">Dodaj_tło</string>
+    <string name="dodaj_tekst">Dodaj tekst</string>
+    <string name="podaj_tekst">Podaj tekst</string>
+    <string name="size_txt">Podaj rozmiar tekstu</string>
 </resources>
