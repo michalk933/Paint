@@ -22,6 +22,11 @@
         android:icon="@drawable/ic_extension_black_24dp"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/load_image_menu"
+        android:title="@string/dodaj_tlo"
+        android:icon="@drawable/ic_add_a_photo_black_24dp"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/save_menu"
         android:title="@string/zapisz"
         android:icon="@drawable/ic_save_black_24dp"

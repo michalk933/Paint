@@ -7,12 +7,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.MonthDisplayHelper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -172,9 +176,7 @@ public class FildDrawing extends View
         return paintLine.getColor();
     }
 
-    public void setBackColor(int color){
-        bitmap.eraseColor(color);
-    }
+    public void setBackColor(int color){ canvasBit.drawColor(color);}
 
     public void setWidhtLine(int width){
         paintLine.setStrokeWidth(width);
@@ -196,6 +198,11 @@ public class FildDrawing extends View
 
     public void setFigure(int typeFigure){
         figure = typeFigure;
+    }
+
+
+    public void imgUri(Uri image){
+
     }
 
 

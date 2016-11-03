@@ -66,7 +66,10 @@ public class MainActivityFragment extends Fragment {
                 FiguresDialog figuresDialog = new FiguresDialog();
                 figuresDialog.show(getFragmentManager(),"Rodzaj rysunku");
                 return true;
-
+            case R.id.load_image_menu:
+                LoadDialog loadDialog = new LoadDialog();
+                loadDialog.show(getFragmentManager(),"Wczytaj zdjecie");
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
