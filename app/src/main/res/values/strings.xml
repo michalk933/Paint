@@ -20,4 +20,7 @@
     <string name="dodaj_tekst">Dodaj tekst</string>
     <string name="podaj_tekst">Podaj tekst</string>
     <string name="size_txt">Podaj rozmiar tekstu</string>
+    <string name="kwadrat_plus">Kwadrat +</string>
+    <string name="kolo_plus">Koło +</string>
+    <string name="sharp">Ząbki</string>
 </resources>

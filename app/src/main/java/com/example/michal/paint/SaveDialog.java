@@ -46,9 +46,6 @@ public class SaveDialog extends DialogFragment {
                 }
             }
         });
-
-
-
         return builder.create();
     }
 

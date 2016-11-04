@@ -46,7 +46,7 @@ public class FildDrawing extends View
     private int figure = 0;
     private int size;
     private String addTxt;
-
+    int counter = 10;
 
 
 
@@ -151,27 +151,11 @@ public class FildDrawing extends View
                 float deltaX = Math.abs(newX - point.x); // count difference carrent point and past point ( point.x declareting int touchFirst and for end this method )
                 float deltaY = Math.abs(newY - point.y);
 
+
+
                 if( deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE){ // if volue delta bigger than 10 000 drawing line
-                    /*
-                    switch (figure) {
-                        case 0:
-                            path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
-                            return ;
-                        case 1:
-                            Random r = new Random();
-                            int i1 = r.nextInt(100 - 15) + 15;
-                            path.addCircle(point.x, point.y,i1, Path.Direction.CW);
-                            return;
-                        case 2:
-                            path.addRect(point.x, point.y,point.x+size, point.y+size, Path.Direction.CW);
-                            return;
-                        case 4:
-                            path.addCircle(point.x, point.y,size, Path.Direction.CW);
-                            return;
-
-                    }*/
-
                     if(figure == 0) {
+                        path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
                         path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
                     }else if(figure == 1){
                         Random r = new Random();
@@ -182,44 +166,17 @@ public class FildDrawing extends View
                     }else if(figure == 4 ){
                         path.addCircle(point.x, point.y,size, Path.Direction.CW);
                     }else if(figure == 5 ){
-                        switch (figure) {
-                            case 0:
-                                path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
-                                return ;
-                            case 1:
-                                Random r = new Random();
-                                int i1 = r.nextInt(100 - 15) + 15;
-                                path.addCircle(point.x, point.y,i1, Path.Direction.CW);
-                                return;
-                            case 2:
-                                path.addRect(point.x, point.y,point.x+size, point.y+size, Path.Direction.CW);
-                                return;
-                            case 4:
-                                path.addCircle(point.x, point.y,size, Path.Direction.CW);
-                                return;
-                        }
+                        path.addCircle(point.x, point.y,incrementationValue(), Path.Direction.CW);
                     }else if(figure == 6 ) {
-                        switch (figure) {
-                            case 0:
-                                path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
-                                return;
-                            case 1:
-                                Random r = new Random();
-                                int i1 = r.nextInt(100 - 15) + 15;
-                                path.addCircle(point.x, point.y, i1, Path.Direction.CW);
-                                return;
-                            case 2:
-                                path.addRect(point.x, point.y, point.x + size, point.y + size, Path.Direction.CW);
-                                return;
-                            case 4:
-                                path.addCircle(point.x, point.y, size, Path.Direction.CW);
-                                return;
-                        }
+                        path.addRect(point.x, point.y,(point.x+(incrementationValue())), (point.y+(incrementationValue())), Path.Direction.CW);
+                    }else if(figure == 7 ) {
+                        path.quadTo(point.x, point.y, point.x +60,point.y+60);
+                        path.quadTo(point.x, point.y, (newX + point.x) / 2, (newY + point.y) / 2);
                     }
-
 
                     point.x = (int) newX;
                     point.y = (int) newY;
+
                 }else if(figure == 3){
                     paintLine.setTextSize(size);
                     canvasBit.drawTextOnPath(addTxt,path,point.x,point.y,paintLine);
@@ -234,6 +191,7 @@ public class FildDrawing extends View
         Path path = pathMap.get(idLine);
         canvasBit.drawPath(path,paintLine);
         path.reset();
+        counter =10;
     }
 
 
@@ -243,13 +201,14 @@ public class FildDrawing extends View
     public int getColorLine(){
         return paintLine.getColor();
     }
-
     public void setBackColor(int color){ canvasBit.drawColor(color);}
-
     public void setWidhtLine(int width){
         paintLine.setStrokeWidth(width);
     }
-
+    public Bitmap getBitmapToSave(){
+        return bitmap;
+    }
+    private int incrementationValue(){return counter = (counter < 250) ? ++counter : 250 ;}
 
     public FildDrawing cleanField(){
         pathMap.clear();
@@ -258,10 +217,6 @@ public class FildDrawing extends View
         paintLine.setColor(Color.BLACK);
         invalidate();
         return null;
-    }
-
-    public Bitmap getBitmapToSave(){
-        return bitmap;
     }
 
     public void setFigure(int typeFigure, int sizeFigure){
@@ -273,10 +228,7 @@ public class FildDrawing extends View
         addTxt = txt;
         figure = 3;
         size = sizeTxt;
-
     }
-
-
 
 
 

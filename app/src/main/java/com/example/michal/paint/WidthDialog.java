@@ -44,8 +44,6 @@ public class WidthDialog extends DialogFragment {
                 fildDrawing.setWidhtLine(widthSeekbar.getProgress());
             }
         });
-
-
         return builder.create();
     }
 

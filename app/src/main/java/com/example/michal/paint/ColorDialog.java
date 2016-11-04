@@ -57,17 +57,12 @@ public class ColorDialog extends DialogFragment {
                  fildDrawingg.setColorLine(color);
              }
          });
-
         return builder.create();
     }
 
     private MainActivityFragment getFildDrawing(){
         return (MainActivityFragment) getFragmentManager().findFragmentById(R.id.fildView);
     }
-
-
-
-
 
     private final SeekBar.OnSeekBarChangeListener changeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override

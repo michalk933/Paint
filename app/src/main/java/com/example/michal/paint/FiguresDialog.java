@@ -26,7 +26,7 @@ import android.widget.Toast;
 public class FiguresDialog extends DialogFragment {
 
     private RadioGroup figureRadioGrup;
-    private RadioButton lineRadioButton, ringRadioButton,recRadioButton,ringOneSizeRadioButton,koloPlusRadioButton, kwadratPlusRadioButton;
+    private RadioButton lineRadioButton, ringRadioButton,recRadioButton,ringOneSizeRadioButton,koloPlusRadioButton, kwadratPlusRadioButton,sharpPlusRadioButton;
     private SeekBar sizeSeekBar;
     private TextView showSize,showFigureTextView;
     private int typeFigure = 0;
@@ -48,13 +48,9 @@ public class FiguresDialog extends DialogFragment {
         sizeSeekBar = (SeekBar)figuresView.findViewById(R.id.sizeTxtSeekBar);
         showSize = (TextView)figuresView.findViewById(R.id.txtShowTextView);
         showFigureTextView = (TextView) figuresView.findViewById(R.id.showFigureTextView);
-
-        ////////
+        sharpPlusRadioButton = (RadioButton)figuresView.findViewById(R.id.sharpPlusRadioButton);
         koloPlusRadioButton = (RadioButton)figuresView.findViewById(R.id.recPlusRadioButton);
         kwadratPlusRadioButton = (RadioButton)figuresView.findViewById(R.id.recPlusRadioButton);
-
-
-
 
         sizeSeekBar.setOnSeekBarChangeListener(changeListenerSeek);
         figureRadioGrup.setOnCheckedChangeListener(checkedlistener);
@@ -100,6 +96,9 @@ public class FiguresDialog extends DialogFragment {
                     break;
                 case R.id.recPlusRadioButton:
                     typeFigure = 6;
+                    break;
+                case R.id.sharpPlusRadioButton:
+                    typeFigure = 7;
                     break;
             }
         }
